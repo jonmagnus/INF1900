@@ -1,1 +1,1 @@
-TODO: Complete the animated_Taylor_series program
+TODO: Complete mandatory exercises for week 6
