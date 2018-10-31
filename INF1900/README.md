@@ -1,1 +1,1 @@
-TODO: Complete exercises for week 10
+TODO: Complete mandatory exercises for week 10
