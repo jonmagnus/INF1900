@@ -2,4 +2,4 @@
 This repository is to store the program files for my homework in the course INF1900
 
 # TODO
-- Complete exercises for week 12
+- Complete mandatory exercises for week 12
