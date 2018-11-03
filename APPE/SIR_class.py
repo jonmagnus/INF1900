@@ -31,22 +31,6 @@ class ProblemSIR(object):
 		return [-self.beta(t)*S*I, # S equation
 			self.beta(t)*S*I - self.nu(t)*I, # I equation
 			self.nu(t)*I] # R equation
-# Example:
-problem = ProblemSIR(beta=lambda t: 0.0005 if t <= 12 else 0.0001,
-		     nu=0.1, S0=1500, I0=1, R0=0, T=60)
-solver = ODESolver.ForwardEuler(problem)
-solver.set_initial_condition([problem.S0,problem.I0,problem.R0])
-u,t = solver.solve(np.linspace(0,problem.T,100*problem.T + 1))
-
-#plt.figure(0)
-plt.subplot(2,1,1)
-plt.title('ForwardEuler')
-plt.plot(t,u[:,0],label='S')
-plt.plot(t,u[:,1],label='I')
-plt.plot(t,u[:,2],label='R')
-plt.plot(t,u[:,0] + u[:,1] + u[:,2],label='sum')
-plt.legend()
-#plt.show()
 
 class SolverSIR(object):
 	def __init__(self,problem,dt):
@@ -65,15 +49,5 @@ class SolverSIR(object):
 		plt.plot(self.t,self.S,label='S')
 		plt.plot(self.t,self.I,label='I')
 		plt.plot(self.t,self.R,label='R')
-		plt.plot(self.t,self.R + self.I + self.S,label='sum')
 
-plt.subplot(2,1,2)
-plt.title('SolverSIR')
-solver = SolverSIR(problem,.5)
-solver.solve()
-solver.plot()
-plt.legend()
-plt.show()
 
-print 'The largest number of infected people at any time was ', int(solver.I.max()), ' according to SolverSIR'
-print 'The largest number of infected people at any time was ', int(u[:,1].max()), ' according to ForwardEuler'
