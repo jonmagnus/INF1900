@@ -4,8 +4,8 @@ import ODESolver
 from SIR_class import ProblemSIR, SolverSIR
 
 class ProblemSIRV(ProblemSIR):
-	def __init__(self,beta,nu,p,S0,I0,R0,V0,T):
-		ProblemSIR.__init__(self,beta,nu,S0,I0,R0,T)
+	def __init__(self,nu,beta,p,S0,I0,R0,V0,T):
+		ProblemSIR.__init__(self,nu,beta,S0,I0,R0,T)
 
 		if isinstance(p, (float,int)):
 			self.p = lambda t: p
@@ -17,7 +17,7 @@ class ProblemSIRV(ProblemSIR):
 	def __call__(self, u, t):
 		"""Right-hand side function of the ODE system."""
 		S, I, R, V = u
-		return [-self.beta(t)*S*I, #- self.p(t)*S,	# S equation
+		return [-self.beta(t)*S*I - self.p(t)*S,	# S equation
 			self.beta(t)*S*I - self.nu(t)*I,	# I equation
 			self.nu(t)*I,				# R equation
 			self.p(t)*S]				# V equation
